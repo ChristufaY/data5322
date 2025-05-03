@@ -68,7 +68,7 @@ In this project, we performed exploratory data preprocessing and built several S
 
 ## Final Thoughts
 - **Potential Improvements**:  
-  - Address **class imbalance** using techniques like SMOTE (Synthetic Minority Over-sampling Technique) or class weight adjustments.  
+  - Address **class imbalance** using techniques like SMOTE (Synthetic Minority Over-sampling Technique) or class weight adjustments (Not in the scope of the class or assignment).  
   - Experiment with **feature engineering** (e.g., interaction terms, binning continuous variables).  
   - Explore **other classifiers** (Random Forest, XGBoost) and compare against SVM results.  
   - Perform **multivariate feature selection** to identify strongest predictors.
