@@ -1,74 +1,80 @@
-## Overview
-In this project, we performed exploratory data preprocessing and built several Support Vector Machine (SVM) classifiers using **linear**, **radial basis function (RBF)**, and **polynomial** kernels to predict cancer occurrence (`CANCEREV`) based on a combination of **demographic** and **habit-related** variables from the NHIS 2022 dataset.
+# Homework 2 – Support Vector Machines: Health Habits & Chronic Disease
+
+This project, part of **Statistical Machine Learning II**, explores how health behaviors and lifestyle factors influence the risk of chronic diseases using **Support Vector Machines (SVMs)**.
+
+📓 Project Notebook: `hw2/hw2.ipynb`
 
 ---
 
-## Data Preprocessing
-- **Selected Variables**:  
-  - **Target**: `CANCEREV`  
-  - **Demographic Variables**: `AGE`, `SEX`, `BMICALC`, `EDUC`, `HINOTCOVE`  
-  - **Habit Variables**: `HRSLEEP`, `FRUTNO`, `VEGENO`, `COFETEAMNO`  
+## 🧠 Objective
 
-- **Data Cleaning**:  
-  - Removed invalid codes such as 999, 998, etc., replaced them with `NaN`.  
-  - Dropped rows with any missing values.  
-  - After cleaning, dataset was reduced from the original size to a smaller, clean subset without invalid entries.
+Using data from the **National Health Interview Survey (NHIS)** accessed through **IPUMS Health Survey**, the goal of this project is to predict the presence of chronic illnesses (e.g. cancer, heart disease, stroke, diabetes, heart attack) based on respondents' lifestyle habits and demographics. 
+
+The assignment emphasizes both technical modeling and ethical interpretation of how everyday behaviors relate to major health outcomes.
 
 ---
 
-## Modeling and Evaluation Summary
+## 📊 Modeling Approach
 
-### Linear SVM
-- **Best Parameters**: Tuned `C` through GridSearchCV.
-- **Performance**:  
-  - **Demographic variables** yielded better predictive performance (higher AUC) than habit-related variables.  
-  - **AUC for habits** hovered near 0.5, indicating performance equivalent to random guessing.  
-  - **Class imbalance** was evident:  
-    - High precision for `No Cancer` class.  
-    - Low recall for `Cancer` class.  
-  - **Decision Boundary (Age vs. BMI)**:  
-    - Boundary is relatively clean but not perfect — due to class imbalance and linear separability limitations.
+This project applies **SVM classification models** to predict disease occurrence using combinations of the following health indicators:
 
----
+- Physical activity levels
+- Diet and food consumption habits
+- Sleep duration
+- Work hours
+- Basic demographics (e.g., age, sex, marital status)
 
-### Radial (RBF) SVM
-- **Best Parameters**: Tuned `C` and `gamma`.
-- **Performance**:  
-  - **Demographic variables** again performed better than habit variables.  
-  - Slightly more balanced precision and recall compared to linear SVM.  
-  - ROC AUC was decent for demographic variables but habit variables remained close to random.  
-  - **Decision Boundary**:  
-    - Less interpretable due to the non-linear nature of RBF.  
-    - Expected, since RBF kernels capture complex boundaries better, though visual clarity reduces.
+The analysis implements and compares three SVM kernels:
 
----
+1. **Linear kernel**  
+   - Interpretable baseline model
+2. **Radial basis function (RBF) kernel**  
+   - Captures non-linear decision boundaries
+3. **Polynomial kernel**  
+   - Flexible non-linear interactions
 
-### Polynomial SVM
-- **Best Parameters**: Tuned `C`, `gamma`, `coef0`, with a fixed `degree` of 2.
-- **Performance**:  
-  - **Demographic variables** outperformed habits again.  
-  - Class imbalance still a problem — very low precision and recall for cancer cases.  
-  - ROC AUC mirrored patterns seen in other kernels.  
-  - **Decision Boundary**:  
-    - Produced an oval-shaped, smooth boundary.  
-    - More flexible than linear but still constrained by degree 2 polynomial structure.
+Each model includes:
+- Careful variable selection and cleaning
+- Standardization and appropriate encoding of predictors
+- Hyperparameter tuning (C, gamma, degree)
+- Performance evaluation using cross-validation
 
 ---
 
-## Key Takeaways
-- **Demographic variables are consistently more predictive** of cancer occurrence compared to lifestyle habits based on ROC AUC scores.
-- **Severe class imbalance**:  
-  - Majority of records are `No Cancer`, making minority class harder to predict.  
-  - Models generally performed better for predicting the majority class.
-- **Habits as standalone predictors performed poorly**, possibly due to weak or indirect relationships with the outcome variable or poor measurement accuracy.
-- **Linear SVM is easier to interpret**, while RBF and Polynomial kernels capture more complex patterns but are harder to visualize, especially with higher-dimensional data.
-- **ROC curves** clearly reflected kernel differences — linear and polynomial offered marginal improvements, while RBF better handled non-linearity.
+## 🔬 Key Insights
+
+- **Top Predictors**: Sleep duration, physical activity, vegetable consumption, and hours worked per week were among the most consistent predictors of disease.
+- **Interpretability**: The linear kernel revealed several intuitive associations, while the RBF kernel better captured complex non-linear relationships.
+- **Demographic Subgroup Analysis**: Subsetting by sex and age suggested different patterns in disease risk based on behavior, with certain habits being more predictive in specific populations.
 
 ---
 
-## Final Thoughts
-- **Potential Improvements**:  
-  - Address **class imbalance** using techniques like SMOTE (Synthetic Minority Over-sampling Technique) or class weight adjustments (Not in the scope of the class or assignment).  
-  - Experiment with **feature engineering** (e.g., interaction terms, binning continuous variables).  
-  - Explore **other classifiers** (Random Forest, XGBoost) and compare against SVM results.  
-  - Perform **multivariate feature selection** to identify strongest predictors.
+## 🧭 Visualization & Ethics
+
+- A hand-crafted **SVM decision boundary plot** demonstrates the classification separation between two key features, illustrating how the margin and support vectors work.
+- The poster and notebook include a detailed explanation of:
+  - SVM equations and conceptual foundations
+  - Kernel function roles
+  - Model selection rationale
+- Special care is given to avoiding misinterpretation of categorical codes and to **ethical communication** of health-related findings.
+
+---
+
+## 🧾 Deliverables
+
+- 📓 Jupyter Notebook: `hw2/hw2.ipynb` – Includes data cleaning, modeling, and evaluation
+- 🖼️ Poster Presentation (submitted separately) – Summarizes methodology, plots, and conclusions in a concise visual format
+
+---
+
+## 🏁 Summary
+
+This project demonstrates the application of **support vector machines** in a real-world healthcare setting. It balances technical rigor with clarity, focusing on:
+
+- Thoughtful variable selection
+- Creative hypothesis generation
+- Strong model tuning and comparison
+- Interpretability and responsibility in presenting health data
+
+It reflects not only technical skills but also critical thinking in modeling design, data ethics, and communication.
+
